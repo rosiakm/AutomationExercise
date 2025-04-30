@@ -1,11 +1,11 @@
-package pages.menu;
+package UI.pages.menu;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pages.base.BasePage;
+import UI.pages.base.BasePage;
 
 public class TopMenuPage extends BasePage {
     Logger logger = LoggerFactory.getLogger(TopMenuPage.class);

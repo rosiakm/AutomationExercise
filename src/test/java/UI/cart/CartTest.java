@@ -1,19 +1,19 @@
-package cart;
+package UI.cart;
 
-import base.Pages;
+import UI.base.BaseTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pages.menu.TopMenuButtons;
+import UI.pages.menu.TopMenuButtons;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CartTest extends Pages {
+public class CartTest extends BaseTest {
 
     SoftAssertions softly = new SoftAssertions();
 
     @Test
-    @Tag("cart")
+    @Tag("UI/cart")
     public void removeItemFromCartTest(){
         consentModalPage.acceptTheAds();
 

@@ -1,6 +1,10 @@
-package base;
+package UI.base;
 
-import helpers.ConfigLoader;
+import UI.helpers.ConfigLoader;
+import UI.pages.cart.CartPage;
+import UI.pages.menu.ConsentModalPage;
+import UI.pages.menu.TopMenuPage;
+import UI.pages.products.ProductsGridPage;
 import lombok.Getter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +17,10 @@ public class BaseTest {
     Logger logger = LoggerFactory.getLogger(BaseTest.class);
 
     private WebDriver driver;
+    public TopMenuPage topMenuPage;
+    public ProductsGridPage productsGridPage;
+    public CartPage cartPage;
+    public ConsentModalPage consentModalPage;
 
     @BeforeEach
     public void setup(){
@@ -32,6 +40,15 @@ public class BaseTest {
         driver.manage().window().maximize();
         driver.get(ConfigLoader.get("baseUrl"));
         logger.info("Url address is opened: {}", ConfigLoader.get("baseUrl"));
+    }
+
+    @BeforeEach
+    public void setPageInstance(){
+        topMenuPage = new TopMenuPage(getDriver());
+        productsGridPage = new ProductsGridPage(getDriver());
+        cartPage = new CartPage(getDriver());
+        consentModalPage = new ConsentModalPage(getDriver());
+        logger.info("Page instances are raised!");
     }
 
     @AfterEach

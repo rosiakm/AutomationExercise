@@ -1,6 +1,6 @@
-package pages.menu;
+package UI.pages.menu;
 
 public enum TopMenuButtons {
     PRODUCTS,
-    CART;
+    CART
 }

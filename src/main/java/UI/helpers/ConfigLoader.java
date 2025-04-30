@@ -1,4 +1,4 @@
-package helpers;
+package UI.helpers;
 
 import java.io.IOException;
 import java.io.InputStream;

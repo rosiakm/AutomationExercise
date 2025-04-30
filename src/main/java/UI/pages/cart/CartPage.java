@@ -1,4 +1,4 @@
-package pages.cart;
+package UI.pages.cart;
 
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -7,19 +7,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pages.base.BasePage;
+import UI.pages.base.BasePage;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static helpers.WaitHandler.waitForElementToBeInvisible;
+import static UI.helpers.WaitHandler.waitForElementToBeInvisible;
 
 @Getter
 public class CartPage extends BasePage {
     Logger logger = LoggerFactory.getLogger(CartPage.class);
 
     @FindBy(css = "tbody tr")
-    public List<WebElement> cartTableItems;
+    private List<WebElement> cartTableItems;
 
     public CartPage(WebDriver driver){
         super(driver);
