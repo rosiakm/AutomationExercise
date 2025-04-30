@@ -18,7 +18,7 @@ public class BaseTest {
 
     public static RequestSpecification getAllProductsList(){
         return (new RequestSpecBuilder()
-                .setBaseUri("https://automationexercise.com/api/productsList"))
+                .setBaseUri("https://automationexercise.com/api"))
                 .build();
     }
 
