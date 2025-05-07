@@ -1,5 +1,6 @@
 package API;
 
+import UI.helpers.ConfigLoader;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -18,7 +19,7 @@ public class BaseTest {
 
     public static RequestSpecification getAllProductsList(){
         return (new RequestSpecBuilder()
-                .setBaseUri("https://automationexercise.com/api"))
+                .setBaseUri(ConfigLoader.get("baseUrl")+"api"))
                 .build();
     }
 
