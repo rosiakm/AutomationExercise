@@ -1,4 +1,4 @@
-package API;
+package api;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 public class AutomationPracticeShopApiTest extends BaseTest{
 
     @Test
-    @Tag("API")
+    @Tag("api")
     @Tag("Products")
     public void shouldGetAllProductsList(){
         given()

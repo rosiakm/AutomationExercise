@@ -1,11 +1,11 @@
-package UI.pages.menu;
+package ui.pages.menu;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import UI.pages.base.BasePage;
+import ui.pages.base.BasePage;
 
 public class ConsentModalPage extends BasePage {
     Logger logger = LoggerFactory.getLogger(ConsentModalPage.class);
@@ -18,7 +18,7 @@ public class ConsentModalPage extends BasePage {
     }
 
     public void acceptTheAds(){
-        click(consentButton);
+        consentButton.click();
         logger.info("Consent modal window is closed");
     }
 }

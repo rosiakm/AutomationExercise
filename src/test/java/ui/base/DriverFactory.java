@@ -1,4 +1,4 @@
-package UI.base;
+package ui.base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -28,7 +28,11 @@ public class DriverFactory {
                 logger.info("Edgedriver is set!");
                 return new EdgeDriver();
             }
-            default -> throw new IllegalArgumentException("Unsupported browser type: " + type);
+            default -> {
+                WebDriverManager.chromedriver().setup();
+                logger.info("Unsupported browser has been set! Chromedriver has been set by default!");
+                return new ChromeDriver();
+            }
         }
     }
 

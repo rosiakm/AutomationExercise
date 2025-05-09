@@ -1,8 +1,7 @@
-package UI.pages.base;
+package ui.pages.base;
 
 import lombok.Data;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
@@ -15,13 +14,5 @@ public class BasePage {
         PageFactory.initElements(driver,this);
         this.driver = driver;
         this.actions = new Actions(driver);
-    }
-
-    public void click(WebElement element){
-        element.click();
-    }
-
-    public String getTextFromWebElement(WebElement element){
-        return element.getText();
     }
 }

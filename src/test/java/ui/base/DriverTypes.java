@@ -1,4 +1,4 @@
-package UI.base;
+package ui.base;
 
 public enum DriverTypes {
     CHROME,

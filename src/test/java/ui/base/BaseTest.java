@@ -1,25 +1,19 @@
-package UI.base;
+package ui.base;
 
-import UI.helpers.ConfigLoader;
-import UI.pages.cart.CartPage;
-import UI.pages.menu.ConsentModalPage;
-import UI.pages.menu.TopMenuPage;
-import UI.pages.products.ProductsGridPage;
+import ui.helpers.ConfigLoader;
 import lombok.Getter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ui.pages.menu.ConsentModalPage;
 
 @Getter
-public class BaseTest {
+public class BaseTest{
     Logger logger = LoggerFactory.getLogger(BaseTest.class);
 
     private WebDriver driver;
-    public TopMenuPage topMenuPage;
-    public ProductsGridPage productsGridPage;
-    public CartPage cartPage;
     public ConsentModalPage consentModalPage;
 
     @BeforeEach
@@ -31,7 +25,7 @@ public class BaseTest {
         try {
             type = DriverTypes.valueOf(browser);
         } catch (IllegalArgumentException e){
-            System.out.println("Unsupported browser: " + browser);
+            logger.info("Unsupported browser: {}", browser);
             type = DriverTypes.CHROME;
         }
 
@@ -43,12 +37,9 @@ public class BaseTest {
     }
 
     @BeforeEach
-    public void setPageInstance(){
-        topMenuPage = new TopMenuPage(getDriver());
-        productsGridPage = new ProductsGridPage(getDriver());
-        cartPage = new CartPage(getDriver());
-        consentModalPage = new ConsentModalPage(getDriver());
-        logger.info("Page instances are raised!");
+    public void acceptTheAds(){
+        consentModalPage = new ConsentModalPage(driver);
+        consentModalPage.acceptTheAds();
     }
 
     @AfterEach

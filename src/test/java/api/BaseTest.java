@@ -1,6 +1,6 @@
-package API;
+package api;
 
-import UI.helpers.ConfigLoader;
+import ui.helpers.ConfigLoader;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -19,7 +19,7 @@ public class BaseTest {
 
     public static RequestSpecification getAllProductsList(){
         return (new RequestSpecBuilder()
-                .setBaseUri(ConfigLoader.get("baseUrl")+"api"))
+                .setBaseUri(ConfigLoader.get("baseUrl").concat("api")))
                 .build();
     }
 

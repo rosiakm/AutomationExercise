@@ -1,4 +1,4 @@
-package UI.pages.menu;
+package ui.pages.menu;
 
 public enum TopMenuButtons {
     PRODUCTS,
