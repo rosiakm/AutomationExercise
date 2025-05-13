@@ -1,4 +1,4 @@
-package ui.cart;
+package ui.tests.cart;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.slf4j.Logger;
@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import ui.base.Pages;
 import ui.helpers.ConfigLoader;
 import ui.pages.cart.CartPage;
-import ui.pages.menu.ConsentModalPage;
 import ui.pages.menu.TopMenuButtons;
 import ui.pages.menu.TopMenuPage;
 import ui.pages.products.ConfirmationModalPage;
@@ -32,7 +31,7 @@ public class CartTest extends Pages {
     }
 
     @Test
-    @Tag("ui/cart")
+    @Tag("ui/tests")
     public void removeItemFromCartTest(){
         topMenuPage.openTopMenuOption(TopMenuButtons.PRODUCTS);
 
@@ -54,7 +53,7 @@ public class CartTest extends Pages {
     }
 
     @Test
-    @Tag("ui/cart")
+    @Tag("ui/tests")
     public void verifyProductQuantityInCartTest(){
         topMenuPage.openTopMenuOption(TopMenuButtons.PRODUCTS);
 

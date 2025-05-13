@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import ui.pages.base.BasePage;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ui.helpers.ProductsHandler.filterProductByName;
 import static ui.helpers.WaitHandler.waitForElementToBeClickable;
@@ -27,6 +28,12 @@ public class ProductsGridPage extends BasePage {
     public List<WebElement> productItems;
     @FindBy(css = ".modal-header h4")
     private WebElement cartModalHeader;
+    @FindBy(css = "#search_product")
+    private WebElement searchInput;
+    @FindBy(css = "#submit_search")
+    private WebElement searchButton;
+    @FindBy(css = ".productinfo p")
+    private List<WebElement> productNameLabels;
 
     public ProductsGridPage(WebDriver driver){
         super(driver);
@@ -61,5 +68,18 @@ public class ProductsGridPage extends BasePage {
     public String getCartModalHeaderConfirmationText(){
         waitForElementToBeVisible(driver, cartModalHeader);
         return cartModalHeader.getText();
+    }
+
+    public void searchProductName(String phrase){
+        searchInput.sendKeys(phrase);
+        logger.info("The phrase: ".concat(phrase).concat(" has been entered"));
+        searchButton.click();
+        logger.info("The search button has been clicked");
+    }
+
+    public List<String> getSearchedProductNames(){
+        return productNameLabels.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 }
