@@ -12,7 +12,6 @@ public class TopMenuPage extends BasePage {
 
     @FindBy(css = "a[href='/products']")
     private WebElement productsButton;
-
     @FindBy(css = "a[href='/view_cart']")
     private WebElement cartButton;
 
@@ -26,12 +25,10 @@ public class TopMenuPage extends BasePage {
             case PRODUCTS -> {
                 productsButton.click();
                 logger.info("Products page is opened");
-                break;
             }
             case CART -> {
                 cartButton.click();
                 logger.info("Cart page is opened");
-                break;
             }
         }
     }

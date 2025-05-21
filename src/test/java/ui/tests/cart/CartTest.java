@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import ui.base.Pages;
+import ui.base.BaseTest;
 import ui.helpers.ConfigLoader;
 import ui.pages.cart.CartPage;
 import ui.pages.menu.TopMenuButtons;
@@ -16,16 +16,20 @@ import ui.pages.products.ProductsGridPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CartTest extends Pages {
+public class CartTest extends BaseTest {
 
     Logger logger = LoggerFactory.getLogger(CartTest.class);
+
+    TopMenuPage topMenuPage;
+    ProductsGridPage productsGridPage;
+    CartPage cartPage;
+    ConfirmationModalPage confirmationModalPage;
 
     @BeforeEach
     public void setPages(){
         topMenuPage = new TopMenuPage(getDriver());
         productsGridPage = new ProductsGridPage(getDriver());
         cartPage = new CartPage(getDriver());
-        productDetailsPage = new ProductDetailsPage(getDriver());
         confirmationModalPage = new ConfirmationModalPage(getDriver());
         logger.info("Page instances are raised!");
     }
@@ -61,6 +65,8 @@ public class CartTest extends Pages {
         assertThat(productsGridName).isEqualTo("ALL PRODUCTS");
 
         productsGridPage.openProductDetailsPageByName("Winter Top");
+
+        ProductDetailsPage productDetailsPage = new ProductDetailsPage(getDriver());
         assertThat(productDetailsPage.getProductPageUrl()).isEqualTo(ConfigLoader.get("winterTopUrl"));
 
         productDetailsPage.setQuantity(4);

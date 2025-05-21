@@ -11,7 +11,7 @@ import ui.pages.base.BasePage;
 
 import java.util.List;
 
-import static ui.helpers.ProductsHandler.filterProductByName;
+import static ui.helpers.ProductsHandler.filterWebElementByName;
 import static ui.helpers.WaitHandler.waitForElementToBeInvisible;
 
 @Getter
@@ -30,7 +30,7 @@ public class CartPage extends BasePage {
     }
 
     public void removeItemFromCartByName(String productName){
-        WebElement cartItem = filterProductByName(productName, cartTableItems, cssToProductNameLabel);
+        WebElement cartItem = filterWebElementByName(productName, cartTableItems, cssToProductNameLabel);
 
         cartItem.findElement(By.cssSelector(cssToDeleteBtn)).click();
         logger.info("Item is deleted from cart");
@@ -38,7 +38,7 @@ public class CartPage extends BasePage {
     }
 
     public int getQuantity(String productName){
-        WebElement cartItem = filterProductByName(productName, cartTableItems, cssToProductNameLabel);
+        WebElement cartItem = filterWebElementByName(productName, cartTableItems, cssToProductNameLabel);
         return Integer.parseInt(cartItem.findElement(By.cssSelector(cssToQuantityBtn)).getText());
     }
 }
