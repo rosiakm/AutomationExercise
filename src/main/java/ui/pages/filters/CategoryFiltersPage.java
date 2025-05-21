@@ -37,19 +37,16 @@ public class CategoryFiltersPage extends BasePage {
                 womenCategoryLabel.click();
                 actions.scrollByAmount(0,250).perform();
                 logger.info("Women category is opened");
-                break;
             }
             case MEN -> {
                 menCategoryLabel.click();
                 actions.scrollByAmount(0,250).perform();
                 logger.info("Men category is opened");
-                break;
             }
             case KIDS -> {
                 kidsCategoryLabel.click();
                 actions.scrollByAmount(0,250).perform();
                 logger.info("Kids category is opened");
-                break;
             }
         }
         if (category.equals(Categories.WOMEN)) {
@@ -57,17 +54,14 @@ public class CategoryFiltersPage extends BasePage {
                 case DRESS -> {
                     filterCategoryByText(Subcategories.DRESS.toString(), womenSubcategoryLabels).click();
                     logger.info("Women -> Dress subcategory is selected");
-                    break;
                 }
                 case TOPS -> {
                     filterCategoryByText(Subcategories.TOPS.toString(), womenSubcategoryLabels).click();
                     logger.info("Women -> Tops subcategory is selected");
-                    break;
                 }
                 case SAREE -> {
                     filterCategoryByText(Subcategories.SAREE.toString(), womenSubcategoryLabels).click();
                     logger.info("Women -> Saree subcategory is selected");
-                    break;
                 }
             }
         } else if (category.equals(Categories.MEN)) {
@@ -75,12 +69,10 @@ public class CategoryFiltersPage extends BasePage {
                 case TSHIRTS -> {
                     filterCategoryByText(Subcategories.TSHIRTS.toString(), menSubcategoryLabels).click();
                     logger.info("Men -> Tshirts subcategory is selected");
-                    break;
                 }
                 case JEANS -> {
                     filterCategoryByText(Subcategories.JEANS.toString(), menSubcategoryLabels).click();
                     logger.info("Men -> Jeans subcategory is selected");
-                    break;
                 }
             }
         } else if (category.equals(Categories.KIDS)) {
@@ -88,12 +80,10 @@ public class CategoryFiltersPage extends BasePage {
                 case KIDSDRESS -> {
                     filterCategoryByText("DRESS", kidsSubcategoryLabels).click();
                     logger.info("Kids -> Dress subcategory is selected");
-                    break;
                 }
                 case TOPSANDSHIRTS -> {
                     filterCategoryByText("TOPS & SHIRTS", kidsSubcategoryLabels).click();
                     logger.info("Kids -> Tops & Shirts subcategory is selected");
-                    break;
                 }
             }
         }
