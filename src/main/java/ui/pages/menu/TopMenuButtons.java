@@ -2,5 +2,8 @@ package ui.pages.menu;
 
 public enum TopMenuButtons {
     PRODUCTS,
-    CART
+    CART,
+    SIGNUP_LOGIN,
+    LOGOUT,
+    DELETE_ACCOUNT
 }

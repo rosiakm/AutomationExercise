@@ -22,9 +22,9 @@ public class FiltersSteps {
         categoryFiltersPage.openCategoryPage(category, subcategory);
     }
 
-    @Step("Verify that opened category title is: {title}")
-    public void verifyOpenedCategoryTitle(String title) {
+    @Step("Verify that opened URL is: {url}")
+    public void verifyOpenedCategoryUrl(String url) {
         ProductsGridPage productsGridPage = new ProductsGridPage(driver);
-        assertThat(productsGridPage.getProductsGridName()).isEqualTo(title);
+        assertThat(productsGridPage.getUrl()).isEqualTo(url);
     }
 }

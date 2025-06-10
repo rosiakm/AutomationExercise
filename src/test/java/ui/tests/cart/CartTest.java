@@ -1,6 +1,5 @@
 package ui.tests.cart;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.Tag;
@@ -13,69 +12,59 @@ import ui.pages.menu.TopMenuPage;
 import ui.pages.products.ConfirmationModalPage;
 import ui.pages.products.ProductDetailsPage;
 import ui.pages.products.ProductsGridPage;
+import ui.pages.products.ProductsList;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static ui.facade.ProductsFacade.*;
+import static ui.facade.TopMenuFacade.openToMenuTab;
 
 public class CartTest extends BaseTest {
-
     Logger logger = LoggerFactory.getLogger(CartTest.class);
 
     TopMenuPage topMenuPage;
-    ProductsGridPage productsGridPage;
-    CartPage cartPage;
     ConfirmationModalPage confirmationModalPage;
-
-    @BeforeEach
-    public void setPages(){
-        topMenuPage = new TopMenuPage(getDriver());
-        productsGridPage = new ProductsGridPage(getDriver());
-        cartPage = new CartPage(getDriver());
-        confirmationModalPage = new ConfirmationModalPage(getDriver());
-        logger.info("Page instances are raised!");
-    }
 
     @Test
     @Tag("ui/tests")
     public void removeItemFromCartTest(){
-        topMenuPage.openTopMenuOption(TopMenuButtons.PRODUCTS);
+        topMenuPage = openToMenuTab(getDriver(), TopMenuButtons.PRODUCTS);
 
-        String productsGridName = productsGridPage.getProductsGridName();
-        assertThat(productsGridName).isEqualTo("ALL PRODUCTS");
+        ProductsGridPage productsGridPage = verifyOpenedProductsPageUrl(getDriver(), ProductsGridPage.class, ConfigLoader.get("productsTabUrl"));
+        addProductToCart(productsGridPage, ProductsList.STYLISH_DRESS);
 
-        productsGridPage.addProductToCartByName("Stylish Dress");
-        assertThat(productsGridPage.getCartModalHeaderConfirmationText()).isEqualTo("Added!");
-        confirmationModalPage.continueShopping(getDriver());
-        productsGridPage.addProductToCartByName("Blue Top");
-        assertThat(productsGridPage.getCartModalHeaderConfirmationText()).isEqualTo("Added!");
-        confirmationModalPage.continueShopping(getDriver());
+        confirmationModalPage = confirmAddedProduct(getDriver());
 
-        topMenuPage.openTopMenuOption(TopMenuButtons.CART);
+        addProductToCart(productsGridPage, ProductsList.BLUE_TOP);
 
+        confirmationModalPage = confirmAddedProduct(getDriver());
+
+        topMenuPage = openToMenuTab(getDriver(), TopMenuButtons.CART);
+
+        CartPage cartPage = new CartPage(getDriver());
         assertThat(cartPage.getCartTableItems().size()).isEqualTo(2);
-        cartPage.removeItemFromCartByName("Blue Top");
+        cartPage.removeItemFromCartByName(ProductsList.BLUE_TOP.toString());
         assertThat(cartPage.getCartTableItems().size()).isEqualTo(1);
     }
 
     @Test
     @Tag("ui/tests")
     public void verifyProductQuantityInCartTest(){
-        topMenuPage.openTopMenuOption(TopMenuButtons.PRODUCTS);
+        topMenuPage = openToMenuTab(getDriver(), TopMenuButtons.PRODUCTS);
 
-        String productsGridName = productsGridPage.getProductsGridName();
-        assertThat(productsGridName).isEqualTo("ALL PRODUCTS");
+        ProductsGridPage productsGridPage = verifyOpenedProductsPageUrl(getDriver(), ProductsGridPage.class, ConfigLoader.get("productsTabUrl"));
+        productsGridPage.openProductDetailsPageByName(ProductsList.HALF_SLEEVES_TOP_SCHIFFLI_DETAILING_PINK.toString());
 
-        productsGridPage.openProductDetailsPageByName("Winter Top");
-
-        ProductDetailsPage productDetailsPage = new ProductDetailsPage(getDriver());
-        assertThat(productDetailsPage.getProductPageUrl()).isEqualTo(ConfigLoader.get("winterTopUrl"));
+        ProductDetailsPage productDetailsPage = verifyOpenedProductsPageUrl(getDriver(), ProductDetailsPage.class, ConfigLoader.get("halfSleevesTopSchiffliDetailingPink"));
 
         productDetailsPage.setQuantity(4);
         productDetailsPage.addProductToCart();
-        confirmationModalPage.continueShopping(getDriver());
 
-        topMenuPage.openTopMenuOption(TopMenuButtons.CART);
+        confirmationModalPage = confirmAddedProduct(getDriver());
 
-        assertThat(cartPage.getQuantity("Winter Top")).isEqualTo(4);
+        topMenuPage = openToMenuTab(getDriver(), TopMenuButtons.CART);
+
+        CartPage cartPage = new CartPage(getDriver());
+        assertThat(cartPage.getQuantity(ProductsList.HALF_SLEEVES_TOP_SCHIFFLI_DETAILING_PINK.toString())).isEqualTo(4);
     }
 
 }

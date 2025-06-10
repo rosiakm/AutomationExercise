@@ -34,10 +34,7 @@ public class BaseTest{
         driver.manage().window().maximize();
         driver.get(ConfigLoader.get("baseUrl"));
         logger.info("Url address is opened: {}", ConfigLoader.get("baseUrl"));
-    }
 
-    @BeforeEach
-    public void acceptTheAds(){
         consentModalPage = new ConsentModalPage(driver);
         consentModalPage.acceptTheAds();
     }
@@ -49,4 +46,8 @@ public class BaseTest{
             logger.info("Driver is quit");
         }
     }
+
+    /*public WebDriver getDriver() {
+        return driver;
+    }*/
 }

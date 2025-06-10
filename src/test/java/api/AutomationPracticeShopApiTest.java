@@ -10,7 +10,7 @@ public class AutomationPracticeShopApiTest extends BaseTest{
     @Test
     @Tag("api")
     @Tag("Products")
-    public void shouldGetAllProductsList(){
+    public void getAllProductsListTest(){
         given()
                 .spec(getAllProductsList()).
         when()

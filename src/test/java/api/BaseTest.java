@@ -20,6 +20,7 @@ public class BaseTest {
     public static RequestSpecification getAllProductsList(){
         return (new RequestSpecBuilder()
                 .setBaseUri(ConfigLoader.get("baseUrl").concat("api")))
+                .setContentType("application/json")
                 .build();
     }
 

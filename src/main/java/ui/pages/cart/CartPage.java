@@ -41,4 +41,8 @@ public class CartPage extends BasePage {
         WebElement cartItem = filterWebElementByName(productName, cartTableItems, cssToProductNameLabel);
         return Integer.parseInt(cartItem.findElement(By.cssSelector(cssToQuantityBtn)).getText());
     }
+
+    /*public List<WebElement> getCartTableItems(){
+        return cartTableItems;
+    }*/
 }

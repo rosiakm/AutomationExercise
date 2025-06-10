@@ -11,13 +11,14 @@ import ui.steps.filters.FiltersSteps;
 
 public class CategoryFiltersTest extends BaseTest {
 
-    @ParameterizedTest(name = "{2} is verified")
+    @ParameterizedTest(name = "{0}, {1} is verified")
     @CsvFileSource(resources = "/testData/filters/filtersTestData")
     @Tag("ui/tests")
+    @Tag("keyword")
     @DisplayName("Opening categories test")
-    public void openCategoryFilterTest(Categories category, Subcategories subcategory, String title){
+    public void openCategoryFilterTest(Categories category, Subcategories subcategory, String url){
         FiltersSteps filtersSteps = new FiltersSteps(getDriver());
         filtersSteps.openCategoryPage(category, subcategory);
-        filtersSteps.verifyOpenedCategoryTitle(title);
+        filtersSteps.verifyOpenedCategoryUrl(url);
     }
 }
