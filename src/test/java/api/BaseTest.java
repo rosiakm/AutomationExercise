@@ -9,13 +9,16 @@ import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.BeforeAll;
 
 public class BaseTest {
+    int number;
 
     @BeforeAll
     public static void setup(){
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
 
+
     public static ResponseSpecification getResponse(){
+
         return (new ResponseSpecBuilder()
                 .expectContentType(ConfigLoader.get("content_type"))
                 .build());
