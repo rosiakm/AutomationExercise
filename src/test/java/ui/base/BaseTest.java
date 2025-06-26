@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ui.pages.menu.ConsentModalPage;
 
+import java.time.Duration;
+
 @Getter
 public class BaseTest{
     Logger logger = LoggerFactory.getLogger(BaseTest.class);
@@ -32,8 +34,9 @@ public class BaseTest{
         driver = DriverFactory.getDriver(type);
         logger.info("Driver is started!");
         driver.manage().window().maximize();
-        driver.get(ConfigLoader.get("baseUrl"));
-        logger.info("Url address is opened: {}", ConfigLoader.get("baseUrl"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.get(ConfigLoader.get("baseUIUrl"));
+        logger.info("Url address is opened: {}", ConfigLoader.get("baseUIUrl"));
 
         consentModalPage = new ConsentModalPage(driver);
         consentModalPage.acceptTheAds();

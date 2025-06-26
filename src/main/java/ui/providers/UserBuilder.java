@@ -12,6 +12,7 @@ public class UserBuilder {
                 .name(faker.name().username())
                 .email(faker.internet().emailAddress())
                 .password(faker.internet().password())
+                .address(AddressBuilder.createAddress())
                 .mobileNumber(faker.phoneNumber().phoneNumber())
                 .build();
     }

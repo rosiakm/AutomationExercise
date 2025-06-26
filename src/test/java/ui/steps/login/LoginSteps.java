@@ -11,54 +11,50 @@ import ui.pages.login.LoginPage;
 import ui.pages.login.RegistrationFormPage;
 import ui.pages.menu.TopMenuButtons;
 import ui.pages.menu.TopMenuPage;
-import ui.providers.AddressBuilder;
-import ui.providers.UserBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoginSteps {
     private final WebDriver driver;
-    User newUser = UserBuilder.createUser();
-    Address newAddress = AddressBuilder.createAddress();
 
     public LoginSteps(WebDriver driver) {
         this.driver = driver;
     }
 
     @Step
-    public LoginSteps openSignupLoginTab(){
+    public LoginSteps openSignupLoginTab(TopMenuButtons tab){
         TopMenuPage topMenuPage = new TopMenuPage(driver);
-        topMenuPage.openTopMenuOption(TopMenuButtons.SIGNUP_LOGIN);
+        topMenuPage.openTopMenuOption(tab);
         assertThat(driver.getCurrentUrl()).isEqualTo(ConfigLoader.get("loginTabUrl"));
         return this;
     }
 
     @Step
-    public LoginSteps selectSignupOption() {
+    public LoginSteps selectSignupOption(AuthMode mode, User user) {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.submitUserCredentials(AuthMode.SIGNUP, newUser.getName(), newUser.getEmail());
+        loginPage.submitUserCredentials(mode, user.getName(), user.getEmail());
         assertThat(driver.getCurrentUrl()).isEqualTo(ConfigLoader.get("signupFormUrl"));
         return this;
     }
 
     @Step
-    public LoginSteps fillInRegistrationFormAndCreateAccount() {
+    public LoginSteps fillInRegistrationFormAndCreateAccount(User user) {
         RegistrationFormPage registrationFormPage = new RegistrationFormPage(driver);
         registrationFormPage.selectRandomTitle()
-                .providePassword(newUser.getPassword())
+                .providePassword(user.getPassword())
                 .selectDay()
                 .selectMonth()
                 .selectYear()
-                .provideFirstName(newUser.getFirstName())
-                .provideLastName(newUser.getLastName())
-                .provideAddress(newAddress.getAddress())
+                .provideFirstName(user.getFirstName())
+                .provideLastName(user.getLastName())
+                .provideAddress(user.getAddress().getAddress())
                 .selectCountry()
-                .provideState(newAddress.getState())
-                .provideCity(newAddress.getCity())
-                .provideZipcode(newAddress.getZipcode())
-                .provideMobileNumber(newUser.getMobileNumber());
+                .provideState(user.getAddress().getState())
+                .provideCity(user.getAddress().getCity())
+                .provideZipcode(user.getAddress().getZipcode())
+                .provideMobileNumber(user.getMobileNumber())
+                .createAccount();
 
-        registrationFormPage.createAccount();
         assertThat(driver.getCurrentUrl()).isEqualTo(ConfigLoader.get("accountCreatedPage"));
 
         AccountInfoPage accountInfoPage = new AccountInfoPage(driver);
@@ -67,20 +63,20 @@ public class LoginSteps {
     }
 
     @Step
-    public LoginSteps loginAsANewUser() {
+    public LoginSteps loginAsANewUser(AuthMode mode, User user) {
         TopMenuPage topMenuPage = new TopMenuPage(driver);
         topMenuPage.openTopMenuOption(TopMenuButtons.LOGOUT);
         assertThat(driver.getCurrentUrl()).isEqualTo(ConfigLoader.get("loginTabUrl"));
 
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.submitUserCredentials(AuthMode.LOGIN, newUser.getPassword(), newUser.getEmail());
+        loginPage.submitUserCredentials(mode, user.getPassword(), user.getEmail());
         return this;
     }
 
     @Step
-    public LoginSteps deleteCreatedAccount() {
+    public LoginSteps deleteCreatedAccount(TopMenuButtons tab) {
         TopMenuPage topMenuPage = new TopMenuPage(driver);
-        topMenuPage.openTopMenuOption(TopMenuButtons.DELETE_ACCOUNT);
+        topMenuPage.openTopMenuOption(tab);
         assertThat(driver.getCurrentUrl()).isEqualTo(ConfigLoader.get("deleteAccountPage"));
 
         AccountInfoPage accountInfoPage = new AccountInfoPage(driver);
@@ -89,13 +85,13 @@ public class LoginSteps {
     }
 
     @Step
-    public void verifyAccountDeletion() {
+    public void verifyAccountDeletion(TopMenuButtons tab, AuthMode mode, User user) {
         TopMenuPage topMenuPage = new TopMenuPage(driver);
-        topMenuPage.openTopMenuOption(TopMenuButtons.SIGNUP_LOGIN);
+        topMenuPage.openTopMenuOption(tab);
         assertThat(driver.getCurrentUrl()).isEqualTo(ConfigLoader.get("loginTabUrl"));
 
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.submitUserCredentials(AuthMode.LOGIN, newUser.getPassword(), newUser.getEmail());
+        loginPage.submitUserCredentials(mode, user.getPassword(), user.getEmail());
         assertThat(loginPage.getWarningMessageText()).isEqualTo(ConfigLoader.get("warningMessage"));
     }
 }

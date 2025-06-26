@@ -14,13 +14,15 @@ import ui.pages.products.ProductDetailsPage;
 import ui.pages.products.ProductsGridPage;
 import ui.pages.products.ProductsList;
 
+import java.util.Random;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static ui.facade.ProductsFacade.*;
 import static ui.facade.TopMenuFacade.openToMenuTab;
 
 public class CartTest extends BaseTest {
     Logger logger = LoggerFactory.getLogger(CartTest.class);
-
+    Random random = new Random();
     TopMenuPage topMenuPage;
     ConfirmationModalPage confirmationModalPage;
 
@@ -56,7 +58,7 @@ public class CartTest extends BaseTest {
 
         ProductDetailsPage productDetailsPage = verifyOpenedProductsPageUrl(getDriver(), ProductDetailsPage.class, ConfigLoader.get("halfSleevesTopSchiffliDetailingPink"));
 
-        productDetailsPage.setQuantity(4);
+        productDetailsPage.setQuantity(random.nextInt());
         productDetailsPage.addProductToCart();
 
         confirmationModalPage = confirmAddedProduct(getDriver());
