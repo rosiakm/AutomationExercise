@@ -20,6 +20,7 @@ public class BaseTest {
     public static ResponseSpecification getResponse(){
 
         return (new ResponseSpecBuilder()
+
                 .expectContentType(ConfigLoader.get("content_type"))
                 .build());
     }
